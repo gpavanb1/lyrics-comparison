@@ -13,5 +13,6 @@ def get_lyrics(song):
     lyrics_ps = lyrics_data[1].findAll('p')
     lyrics = []
     for lyrics_p in lyrics_ps:
-        lyrics.extend(lyrics_p.text.split('\n'))
+        lyrics.append(lyrics_p.text.replace('\n', ' '))
+    lyrics = ' '.join(lyrics)
     return lyrics
