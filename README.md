@@ -4,7 +4,7 @@
 
 Compare lyrics between languages by just providing the title
 
-This repository contains integration to Genius API client for fetching lyrics and uses [Spacy](https://spacy.io/) and [indic_transliteration](https://pypi.org/project/indic-transliteration/) for translating and calculating similarity.
+This repository contains integration to [Genius API client](https://docs.genius.com/) or [OpenAI](https://openai.com/blog/openai-api) for fetching lyrics and uses [Spacy](https://spacy.io/) and [indic_transliteration](https://pypi.org/project/indic-transliteration/) for translating and calculating similarity.
 
 # How to execute?
 
