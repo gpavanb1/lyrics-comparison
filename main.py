@@ -6,15 +6,17 @@ from lyrics.genius import get_lyrics
 from constants import DEFAULT_ARTIST
 from utils import similarity
 
+ARTIST = DEFAULT_ARTIST
 
 # Parse arguments
 if len(sys.argv) < 3:
     raise Exception('Insufficient arguments specified')
+if len(sys.argv) == 4:
+    ARTIST = sys.argv[3]
 
 # Change this
 TAMIL_SONG = sys.argv[1]
 TELUGU_SONG = sys.argv[2]
-ARTIST = sys.argv[3] if not None else DEFAULT_ARTIST
 
 print(f"Comparing \"{TAMIL_SONG}\" and \"{TELUGU_SONG}\"")
 
