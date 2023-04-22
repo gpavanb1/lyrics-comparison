@@ -1,0 +1,1 @@
+DEFAULT_ARTIST = "A. R. Rahman"
