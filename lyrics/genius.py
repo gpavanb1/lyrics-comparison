@@ -1,12 +1,12 @@
 import os
-from dotenv import load_dotenv
 import lyricsgenius
-
-# Access the constant value
-GENIUS_ACCESS_TOKEN = os.environ.get('GENIUS_ACCESS_TOKEN')
+from dotenv import load_dotenv
 
 # Load the .env file
 load_dotenv()
+
+# Access the constant value
+GENIUS_ACCESS_TOKEN = os.environ.get('GENIUS_ACCESS_TOKEN')
 
 genius = lyricsgenius.Genius(GENIUS_ACCESS_TOKEN)
 

@@ -2,7 +2,7 @@
 usage: python main.py "pudhu vellai mazhai" "paruvam vanaga"
 """
 import sys
-from lyrics.genius import get_lyrics
+from lyrics.openai import get_lyrics
 from constants import DEFAULT_ARTIST
 from utils import similarity
 
