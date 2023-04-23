@@ -10,9 +10,18 @@ This repository contains integration to [Genius API client](https://docs.genius.
 
 Just run 
 ```
-python main.py "pudhu vellai mazhai" "paruvam vanaga"
+python main.py --mode [global, local] <--source [genius, openai]> 
 ```
 
+Those in `[` indicate possible options and those in `<` indicate optional arguments
+
+# Local lyrics translation
+
+To utilize lyrics that are available locally, please create a `lyrics_text` folder with subfolders as `tamil` and `telugu`
+
+You can then add files with song names in lowercase and spaces replaced by `_`. For example, in `lyrics_text/tamil`, you can have a file named `pachai_nirame`.
+
+We will leave it upto the user to source lyrics from an appropriate source.
 ## Whom to contact?
 
 Please direct your queries to [gpavanb1](http://github.com/gpavanb1)
