@@ -9,7 +9,7 @@ from lyrics.genius import get_lyrics as get_genius
 from lyrics.openai import get_lyrics as get_openai
 
 
-TRUNCATE_LENGTH = 1024
+TRUNCATE_LENGTH = 512
 
 # Embedding related
 tokenizer = BertTokenizerFast.from_pretrained("setu4993/LaBSE")
@@ -33,7 +33,7 @@ def cosine_similarity(a, b):
     normalized_b = F.normalize(b, p=2)
     return torch.matmul(
         normalized_a, normalized_b.transpose(0, 1)
-    )
+    ).item()
 
 
 def transliterate(text, code):
@@ -51,8 +51,8 @@ def similarity(a, b):
 
     # Perform similarity matching
     print('Performing similarity between...')
-    print(t_a[:25])
-    print(t_b[:25])
+    print(t_a[:25] + '...')
+    print(t_b[:25] + '...')
 
     encoded_tamil = encode_text(t_a)
     encoded_telugu = encode_text(t_b)
