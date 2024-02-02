@@ -1,6 +1,6 @@
 # Lyrics Comparison
 
-![Made with Love in India](https://madewithlove.org.in/badge.svg)
+![Made with love in India](https://madewithlove.now.sh/in?heart=true)
 
 Compare lyrics between languages by just providing the title
 
