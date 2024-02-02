@@ -1,16 +1,44 @@
-import spacy
-from indic_transliteration import sanscript
-from indic_transliteration.sanscript import transliterate
-from translate import Translator
-
+import torch
+import torch.nn.functional as F
+# Transliteration
+from ai4bharat.transliteration import XlitEngine
+# Embeddings
+from transformers import BertModel, BertTokenizerFast
+# Lyrics download
 from lyrics.genius import get_lyrics as get_genius
 from lyrics.openai import get_lyrics as get_openai
 
-t_tamil = Translator(from_lang="ta", to_lang="en")
-t_telugu = Translator(from_lang="te", to_lang="en")
 
-nlp = spacy.load('en_core_web_md')
-TRUNCATE_LENGTH = 500
+TRUNCATE_LENGTH = 512
+
+# Embedding related
+tokenizer = BertTokenizerFast.from_pretrained("setu4993/LaBSE")
+model = BertModel.from_pretrained("setu4993/LaBSE")
+model = model.eval()
+
+# Transliteration related
+engine = XlitEngine(["ta", "te"], beam_width=10, rescore=False)
+
+
+def encode_text(text):
+    encoded_input = tokenizer(
+        text, return_tensors='pt', padding=True, truncation=True, max_length=TRUNCATE_LENGTH)
+    with torch.no_grad():
+        model_output = model(**encoded_input)
+    return model_output.pooler_output
+
+
+def cosine_similarity(a, b):
+    normalized_a = F.normalize(a, p=2)
+    normalized_b = F.normalize(b, p=2)
+    return torch.matmul(
+        normalized_a, normalized_b.transpose(0, 1)
+    ).item()
+
+
+def transliterate(text, code):
+    return engine.translit_sentence(text, lang_code=code)
+
 
 def similarity(a, b):
     # Convert to smallcase
@@ -18,21 +46,18 @@ def similarity(a, b):
     b = b.lower()
 
     # Transliterate into respective languages
-    t_a = transliterate(a, sanscript.HK, sanscript.TAMIL)[:TRUNCATE_LENGTH]
-    t_b = transliterate(b, sanscript.HK, sanscript.TELUGU)[:TRUNCATE_LENGTH]
-
-    # Translate output into English
-    e_a = t_tamil.translate(t_a)
-    e_b = t_telugu.translate(t_b)
+    t_a = transliterate(a, 'ta')
+    t_b = transliterate(b, 'te')
 
     # Perform similarity matching
     print('Performing similarity between...')
-    print(e_a[:25])
-    print(e_b[:25])
+    print(t_a[:25] + '...')
+    print(t_b[:25] + '...')
 
-    nlp_ea = nlp(e_a)
-    nlp_eb = nlp(e_b)
-    return nlp_ea.similarity(nlp_eb)
+    encoded_tamil = encode_text(t_a)
+    encoded_telugu = encode_text(t_b)
+
+    return cosine_similarity(encoded_tamil, encoded_telugu)
 
 
 def get_lyrics_source(song_title, song_artist, source):

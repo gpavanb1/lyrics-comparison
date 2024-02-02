@@ -9,7 +9,8 @@ from utils import similarity, get_lyrics_source
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--mode", choices=["local", "global"], default="local")
-parser.add_argument("--source", choices=["genius", "openai"], default="genius", required=False)
+parser.add_argument(
+    "--source", choices=["genius", "openai"], default="genius", required=False)
 args = parser.parse_args()
 
 ARTIST = DEFAULT_ARTIST
@@ -30,13 +31,14 @@ if args.mode == 'local':
     lyrics_a = get_local(TAMIL_SONG, lang='ta')
     lyrics_b = get_local(TELUGU_SONG, lang='te')
 elif args.mode == 'global':
-        lyrics_a = get_lyrics_source(TAMIL_SONG, ARTIST, args.source)
-        lyrics_b = get_lyrics_source(TELUGU_SONG, ARTIST, args.source)
+    lyrics_a = get_lyrics_source(TAMIL_SONG, ARTIST, args.source)
+    lyrics_b = get_lyrics_source(TELUGU_SONG, ARTIST, args.source)
 score = similarity(lyrics_a, lyrics_b)
 
 # Summary
 print('')
 print('Summary')
-print(lyrics_a[:25])
-print(lyrics_b[:25])
+print(lyrics_a[:25] + '...')
+print(lyrics_b[:25] + '...')
+print('')
 print(score)
