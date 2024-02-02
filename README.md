@@ -4,7 +4,7 @@
 
 Compare lyrics between languages by just providing the title
 
-This repository contains integration to [Genius API client](https://docs.genius.com/) or [OpenAI](https://openai.com/blog/openai-api) for fetching lyrics and uses [LaBSE](https://huggingface.co/sentence-transformers/LaBSE)[1] and [AI4Bharat transliteration](https://pypi.org/project/ai4bharat-transliteration/)[2] for translating and calculating similarity.
+This repository contains integration to [Genius API client](https://docs.genius.com/) or [OpenAI](https://openai.com/blog/openai-api) for fetching lyrics and uses [LaBSE](https://huggingface.co/sentence-transformers/LaBSE) [1] and [AI4Bharat transliteration](https://pypi.org/project/ai4bharat-transliteration/) [2] for translating and calculating similarity.
 
 ## How to execute?
 
