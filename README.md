@@ -21,7 +21,11 @@ To utilize lyrics that are available locally, please create a `lyrics_text` fold
 
 You can then add files with song names in lowercase and spaces replaced by `_`. For example, in `lyrics_text/tamil`, you can have a file named `pachai_nirame.txt`.
 
-We will leave it upto the user to source lyrics from an appropriate source.
+
+## Example
+This repository includes an example where the files have already been downloaded. We will leave it upto the user to source lyrics from an appropriate source.
+
+![example](./images/example.png)
 
 ## Whom to contact?
 
