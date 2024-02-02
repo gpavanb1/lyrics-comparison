@@ -9,7 +9,7 @@ from lyrics.genius import get_lyrics as get_genius
 from lyrics.openai import get_lyrics as get_openai
 
 
-TRUNCATE_LENGTH = 500
+TRUNCATE_LENGTH = 1024
 
 # Embedding related
 tokenizer = BertTokenizerFast.from_pretrained("setu4993/LaBSE")
@@ -22,7 +22,7 @@ engine = XlitEngine(["ta", "te"], beam_width=10, rescore=False)
 
 def encode_text(text):
     encoded_input = tokenizer(
-        text, return_tensors='pt', padding=True, truncation=True, max_length=128)
+        text, return_tensors='pt', padding=True, truncation=True, max_length=TRUNCATE_LENGTH)
     with torch.no_grad():
         model_output = model(**encoded_input)
     return model_output.pooler_output
